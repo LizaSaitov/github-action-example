@@ -1,21 +1,33 @@
 name: if-actions
 
-on: [pull_request]
-    
+on:
+  push:
+  pull_request:
+
 jobs:
-  security-scan:
-    if: ${{github.branch == 'dev' }}
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Print test
-        run: echo "we are keeping you safe..."
+      - run: echo "running tests"
 
-on: [push]
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - run: echo "building app"
 
-  security-scan:
-      if: ${{github.branch == 'main' }}
-      runs-on: ubuntu-latest
-      needs: test
-      steps:
-        - name: do build
-          run: echo "building app"
+  # runs only for pull requests
+  pr-check:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request'
+    steps:
+      - run: echo "Running security check"
+
+  # runs only on push to main
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - run: echo "deploying to production from main"
