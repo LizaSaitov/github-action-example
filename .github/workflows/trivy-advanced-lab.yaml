@@ -1,3 +1,5 @@
+name: trivy-advanced-lab
+
 on:
   workflow_dispatch:
 
