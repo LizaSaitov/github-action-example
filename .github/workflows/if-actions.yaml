@@ -1,0 +1,21 @@
+name: if-actions
+
+on: [pull_request]
+    
+jobs:
+  security-scan:
+    if: ${{github.branch == 'dev' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print test
+        run: echo "we are keeping you safe..."
+
+on: [push]
+
+  security-scan:
+      if: ${{github.branch == 'main' }}
+      runs-on: ubuntu-latest
+      needs: test
+      steps:
+        - name: do build
+          run: echo "building app"
