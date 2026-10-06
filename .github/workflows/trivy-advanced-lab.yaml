@@ -11,3 +11,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Run trivy scan
+      - run: trivy --version
+
