@@ -1,0 +1,46 @@
+name: project-pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Application start
+        run: echo "Application start"
+  
+  SCM-pull:
+    runs-on: ubuntu-latest
+    needs: start
+    steps:
+      - name: Pulling SCM
+        run: echo "pulling SCM...."
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: docker building
+        run: echo "Building docker currently"
+
+  trivy-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Trivy CLI
+        uses: ankurk91/install-trivy-cli-action@v2
+        with:
+         version: latest
+         cache: true
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run trivy scan
+        run: trivy --version
+
+
+  bandit-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: bandit-scanning
+        run: echo "Bandit is curremtly scanning.."
