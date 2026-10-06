@@ -1,0 +1,19 @@
+name: needs-actions
+
+on:
+  push:
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print test
+        run: echo "we are running tests here..."
+
+  build:
+      runs-on: ubuntu-latest
+      needs: test
+      steps:
+        - name: do build
+          run: echo "building app"
