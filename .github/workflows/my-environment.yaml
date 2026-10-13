@@ -1,0 +1,17 @@
+name: my-environment
+
+on:
+  push:
+    
+jobs:
+    runs-on: ubuntu-latest
+    environment: production
+
+env:
+  APP_ENV: production
+
+    steps:
+      - name: Print env variable
+        run: echo $MY_ENVIORMENT 
+
+
