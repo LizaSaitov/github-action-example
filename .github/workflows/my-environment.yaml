@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  example:
+  env-lab:
     runs-on: ubuntu-latest
     environment: production
 
@@ -13,6 +13,11 @@ jobs:
         env:
           MY_ENVIORMENT: ${{ vars.MY_ENVIORMENT }}
         run: echo "$MY_ENVIORMENT"
+
+  secret-lab:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Print repo secret
         env:
           JB_DEMO_USER: ${{ secrets.JB_DEMO_USER }}
