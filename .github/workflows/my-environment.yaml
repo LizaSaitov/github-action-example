@@ -13,3 +13,7 @@ jobs:
         env:
           MY_ENVIORMENT: ${{ vars.MY_ENVIORMENT }}
         run: echo "$MY_ENVIORMENT"
+      - name: Print repo secret
+        env:
+          JB_DEMO_USER: ${{ secrets.JB_DEMO_USER }}
+        run: echo "$JB_DEMO_USER"
