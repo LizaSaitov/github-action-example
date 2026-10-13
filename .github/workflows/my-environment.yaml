@@ -2,13 +2,14 @@ name: my-environment
 
 on:
   push:
-    
+
 jobs:
+  example:
     runs-on: ubuntu-latest
     environment: production
 
     steps:
       - name: Print env variable
-        run: echo "${{ vars.MY_ENVIORMENT }}" 
-
-
+        env:
+          MY_ENVIORMENT: ${{ vars.MY_ENVIORMENT }}
+        run: echo "$MY_ENVIORMENT"
